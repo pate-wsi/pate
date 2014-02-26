@@ -1,6 +1,6 @@
 # coding: utf-8
 
-import os, ConfigParser, hashlib
+import os, ConfigParser
 from flask import Flask, g, redirect, url_for, flash, request, render_template
 from flask.ext.login import LoginManager, login_user, logout_user, current_user, login_required
 from flask.ext.sqlalchemy import SQLAlchemy
@@ -54,7 +54,7 @@ def login_local():
     if not user:
         flash('login failed!', 'warning')
         return redirect('/login')
-    if user.password == hashlib.sha512(password).hexdigest():
+    if user.check_password(password):
         flash('login successful!', 'success')
         login_user(user)
         return redirect('/')

@@ -1,16 +1,19 @@
 # coding: utf-8
 
-from sqlalchemy import Column, Integer, Unicode, Boolean
+from sqlalchemy import Column, Integer, Unicode, Boolean, DateTime
 from model import Base
-import hashlib
+import hashlib, datetime
 
 class User(Base):
     __tablename__ = 'users'
 
     id = Column(Integer, primary_key=True)
     name = Column(Unicode(64), nullable=False)
+    alias = Column(Unicode(64))
     _type = Column('type', Unicode(4), nullable=False)
     active = Column(Boolean(), nullable=False)
+    first_login = Column(DateTime(), default=datetime.datetime.utcnow)
+    last_login = Column(DateTime())
     
     __mapper_args__ = {'polymorphic_on': _type}
 
