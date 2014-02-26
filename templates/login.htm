@@ -1,0 +1,41 @@
+{% extends "master.htm" %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<form class="form-horizontal" action="/login_local" method="post">
+<fieldset>
+
+<!-- Form Name -->
+<legend>Pate Login</legend>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="username">Username</label>  
+  <div class="col-md-4">
+  <input id="username" name="username" type="text" placeholder="Username" class="form-control input-md" required="">
+    
+  </div>
+</div>
+
+<!-- Password input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="password">Password</label>
+  <div class="col-md-4">
+    <input id="password" name="password" type="password" placeholder="Password" class="form-control input-md" required="">
+    
+  </div>
+</div>
+
+<!-- Button -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="submitbtn"></label>
+  <div class="col-md-4">
+    <button id="submitbtn" name="submitbtn" class="btn btn-success">Login</button>
+  </div>
+</div>
+
+</fieldset>
+</form>
+
+{% endblock %}
