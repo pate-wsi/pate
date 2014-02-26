@@ -2,7 +2,7 @@
 
 import os, ConfigParser, hashlib
 from flask import Flask, g, redirect, url_for, flash, request, render_template
-from flask.ext.login import LoginManager, login_user, logout_user, current_user
+from flask.ext.login import LoginManager, login_user, logout_user, current_user, login_required
 from flask.ext.sqlalchemy import SQLAlchemy
 import model
 
@@ -22,11 +22,19 @@ with app.app_context():
 
 @app.route('/')
 def index():
-    return render_template('index.htm', user=current_user)
+    return render_template('index.htm')
 
 @app.route('/login')
 def login():
-    return render_template('login.htm', user=current_user)
+    return render_template('login.htm')
+
+@app.route("/logout")
+@login_required
+def logout():
+    logout_user()
+    flash('logout successful!', 'success')
+    return redirect('/')
+    
 
 @login_manager.user_loader
 def load_user(userid):

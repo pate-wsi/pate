@@ -5,6 +5,10 @@
 {% block content %}
   <h1>Index</h1>
   <p class="lead">
-    Welcome on my awesome homepage.
+    {% if current_user.id %}
+      Hello {{ current_user.name }}. Welcome back!
+    {% else %}
+      Howdy!
+    {% endif %}
   </p>
 {% endblock %}
