@@ -44,13 +44,13 @@ def login_local():
     user = db.session.query(model.User_local).filter(model.User_local.name == username).first()
     
     if not user:
-        flash('login failed!')
+        flash('login failed!', 'warning')
         return redirect('/login')
     if user.password == hashlib.sha512(password).hexdigest():
-        flash('login successful!')
+        flash('login successful!', 'success')
         login_user(user)
         return redirect('/')
-    flash('login failed!')
+    flash('login failed!', 'warning')
     return redirect('/login')
 
 
