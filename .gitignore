@@ -1,5 +1,6 @@
 *.pyc
 *~
+/server.ini
 
 /.idea
 .project
