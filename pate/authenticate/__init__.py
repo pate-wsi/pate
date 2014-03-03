@@ -9,7 +9,7 @@ bp = Blueprint('authenticate', __name__)
 
 
 @bp.route('/')
-def login():
+def index():
     return render_template('login.htm')
     
 

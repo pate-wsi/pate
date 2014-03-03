@@ -1,10 +1,10 @@
 # coding: utf-8
 
-from flask import redirect, request, flash
+from flask import redirect, request, flash, url_for
 from flask.ext.login import login_user
 from pate import db, model
 
-#@current_app.route("/login_local")
+
 def login_local():
     if request.method == 'POST':
         username = request.form["username"]
@@ -17,10 +17,10 @@ def login_local():
 
     if not user:
         flash('login failed!', 'warning')
-        return redirect('/authenticate')
+        return redirect(url_for('authenticate.index'))
     if user.check_password(password):
         flash('login successful!', 'success')
         login_user(user)
-        return redirect('/')
+        return redirect(url_for('index'))
     flash('login failed!', 'warning')
-    return redirect('/authenticate')
+    return redirect(url_for('authenticate.index'))
