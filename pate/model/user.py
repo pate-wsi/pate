@@ -1,7 +1,7 @@
 # coding: utf-8
 
 from sqlalchemy import Column, Integer, Unicode, Boolean, DateTime
-from model import Base
+from pate.model import Base
 import hashlib, datetime
 
 class User(Base):
