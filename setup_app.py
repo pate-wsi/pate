@@ -18,5 +18,5 @@ twitter.consumer_key = 'xBeXxg9lyElUgwZT6AZ0A'
 twitter.consumer_secret = 'aawnSpNTOVuDCjx7HMh6uSXetjNN8zWLpZwCEU4LBrk'
 
 
-db.session.add(root, twitter)
+db.session.add_all([root, twitter])
 db.session.commit()

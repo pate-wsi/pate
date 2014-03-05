@@ -64,6 +64,7 @@ class User_local(User):
 class User_oauth(User):
     pass
 
+
 class User_twitter(User_oauth):
     __mapper_args__ = {'polymorphic_identity': 'twtr'}
 

@@ -3,12 +3,14 @@
 from flask import redirect, request, flash, url_for, session
 from flask.ext.login import login_user
 from pate import db, model, oauth
+from pate.config.oauth import getOAuthCfg
 
+cfg = getOAuthCfg('twtr')
 
 twitter = oauth.remote_app(
     'twitter',
-    consumer_key='xBeXxg9lyElUgwZT6AZ0A',
-    consumer_secret='aawnSpNTOVuDCjx7HMh6uSXetjNN8zWLpZwCEU4LBrk',
+    consumer_key=cfg.consumer_key,
+    consumer_secret=cfg.consumer_secret,
     base_url='https://api.twitter.com/1.1/',
     request_token_url='https://api.twitter.com/oauth/request_token',
     access_token_url='https://api.twitter.com/oauth/access_token',
@@ -17,13 +19,15 @@ twitter = oauth.remote_app(
 
 
 def login_twitter():
+    if not cfg.active:
+        flash('twitter login disabled!', 'warning')
+        return redirect(url_for('index'))
     callback_url = url_for('.oauthorized_twitter', next=request.args.get('next'))
     return twitter.authorize(callback=callback_url or request.referrer or None)
 
 
 @twitter.authorized_handler
 def oauthorized_twitter(resp):
-    print resp
     if resp is None:
         flash('login failed!', 'warning')
     else:
