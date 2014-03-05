@@ -22,7 +22,9 @@ def logout():
     return redirect('/')
 
 
+# login local
 bp.add_url_rule('/login_local', 'login_local', login_local, methods=['GET', 'POST'])
 
-bp.add_url_rule('/login_twitter', 'login_twitter', login_twitter, methods=['GET', 'POST'])
-bp.add_url_rule('/oauthorized_twitter', 'oauthorized_twitter', oauthorized_twitter, methods=['GET', 'POST'])
+# login twitter
+bp.add_url_rule('/login_twitter', 'login_twitter', login_twitter)
+bp.add_url_rule('/oauthorized_twitter', 'oauthorized_twitter', oauthorized_twitter)

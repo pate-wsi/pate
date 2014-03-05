@@ -21,6 +21,11 @@ class User(Base):
         self.name = name
         self.active = active
 
+    def get_displayname(self):
+        return self.alias
+
+    displayname = property(get_displayname)
+
     def is_active(self):
         return self.active
 
@@ -56,7 +61,10 @@ class User_local(User):
             return False
 
 
-class User_twitter(User):
+class User_oauth(User):
+    pass
+
+class User_twitter(User_oauth):
     __mapper_args__ = {'polymorphic_identity': 'twtr'}
 
     type = 'twitter'

@@ -16,13 +16,6 @@ twitter = oauth.remote_app(
 )
 
 
-#@twitter.tokengetter
-#def get_twitter_token():
-#    if 'twitter_oauth' in session:
-#        resp = session['twitter_oauth']
-#        return resp['oauth_token'], resp['oauth_token_secret']
-
-
 def login_twitter():
     callback_url = url_for('.oauthorized_twitter', next=request.args.get('next'))
     return twitter.authorize(callback=callback_url or request.referrer or None)
@@ -32,7 +25,18 @@ def login_twitter():
 def oauthorized_twitter(resp):
     print resp
     if resp is None:
-        flash('You denied the request to sign in.')
+        flash('login failed!', 'warning')
     else:
-        session['twitter_oauth'] = resp
+        uid = resp['user_id']
+        alias = resp['screen_name']
+        user = db.session.query(model.User_twitter).filter(model.User_twitter.name == uid).first()
+        if not user:
+            user = model.User_twitter()
+            user.name = uid
+            db.session.add(user)
+            db.session.commit()
+        if user.alias != alias:
+            user.alias = alias
+            db.session.commit()
+        login_user(user)
     return redirect(url_for('index'))

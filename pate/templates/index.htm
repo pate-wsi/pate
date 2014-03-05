@@ -6,7 +6,7 @@
   <h1>Index</h1>
   <p class="lead">
     {% if current_user.id %}
-      Hello {{ current_user.name }}. Welcome back!
+      Hello {{ current_user.displayname }}. Welcome back!
     {% else %}
       Howdy!
     {% endif %}
