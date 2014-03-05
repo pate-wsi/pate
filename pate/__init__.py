@@ -4,6 +4,7 @@ import os, ConfigParser
 from flask import Flask, g, redirect, url_for, flash, request, render_template
 from flask.ext.login import LoginManager, current_user
 from flask.ext.sqlalchemy import SQLAlchemy
+from flask_oauthlib.client import OAuth
 
 config = ConfigParser.ConfigParser()
 config.readfp(open('server.ini'))
@@ -15,6 +16,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = config.get("DATABASE", "sqlalchemy.url")
 db = SQLAlchemy(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
+oauth = OAuth(app)
 
 import model, authenticate
 

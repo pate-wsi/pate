@@ -3,6 +3,10 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
+
+<legend>Universal Login</legend>
+<a class='btn btn-twitter' href="/authenticate/login_twitter"><i class="fa fa-twitter"></i> | Login with Twitter</a>
+
 <form class="form-horizontal" action="/authenticate/login_local" method="post">
 <fieldset>
 
