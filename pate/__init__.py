@@ -18,10 +18,11 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 oauth = OAuth(app)
 
-import model, authenticate
+import model, authenticate, user
 
 
 app.register_blueprint(authenticate.bp, url_prefix='/authenticate')
+app.register_blueprint(user.bp, url_prefix='/user')
 
 
 @login_manager.user_loader
