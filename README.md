@@ -1,7 +1,7 @@
 Pate
 ----
 
-### Instalation
+### Installation
 
         git clone https://github.com/pate-wsi/pate.git
         cd pate
