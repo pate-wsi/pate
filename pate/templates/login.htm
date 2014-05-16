@@ -5,7 +5,9 @@
 {% block content %}
 
 <legend>Universal Login</legend>
-<a class='btn btn-twitter' href="/authenticate/login_twitter"><i class="fa fa-twitter"></i> | Login with Twitter</a>
+<p style="margin-bottom: 1em;">
+  <a class='btn btn-twitter' href="/authenticate/login_twitter"><i class="fa fa-twitter"></i> | Login with Twitter</a>
+</p>
 
 <form class="form-horizontal" action="/authenticate/login_local" method="post">
 <fieldset>
@@ -18,7 +20,6 @@
   <label class="col-md-4 control-label" for="username">Username</label>  
   <div class="col-md-4">
   <input id="username" name="username" type="text" placeholder="Username" class="form-control input-md" required="">
-    
   </div>
 </div>
 

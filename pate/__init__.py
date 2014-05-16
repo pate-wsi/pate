@@ -18,11 +18,12 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 oauth = OAuth(app)
 
-import model, authenticate, user
+import model, authenticate, user, basket
 
 
 app.register_blueprint(authenticate.bp, url_prefix='/authenticate')
 app.register_blueprint(user.bp, url_prefix='/user')
+app.register_blueprint(basket.bp, url_prefix='/basket')
 
 
 @login_manager.user_loader
