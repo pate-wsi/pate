@@ -3,10 +3,12 @@
 {% block content %}
 
 <ul class="nav nav-tabs" style="margin-bottom: 1em;">
-  <li class="active"><a href="#">My Baskets</a></li>
-  <li><a href="#">Starred</a></li>
-  <li class="nav navbar-nav navbar-right"><a href="/basket/create"><span class="glyphicon glyphicon-plus"></span> New Basket
-</a></li>
+  <li><a href="{{ url_for('.my_baskets') }}">{{ _('My Baskets') }}</a></li>
+  <li><a href="#">{{ _('Starred') }}</a></li>
+  {% if basket -%}
+    <li><a href="/basket/create">{{ _('Edit Basket') }}</a></li>
+  {% endif %}
+  <li class="nav navbar-nav navbar-right"><a href="{{ url_for('.create') }}"><span class="glyphicon glyphicon-plus"></span>{{ _('New Basket') }}</a></li>
 </ul>
 
 {% block basket %}{% endblock %}

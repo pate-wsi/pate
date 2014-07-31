@@ -5,6 +5,7 @@ from flask import Flask, g, redirect, url_for, flash, request, render_template
 from flask.ext.login import LoginManager, current_user
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask_oauthlib.client import OAuth
+from flask.ext.babel import Babel
 
 config = ConfigParser.ConfigParser()
 config.readfp(open('server.ini'))
@@ -17,6 +18,8 @@ db = SQLAlchemy(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
 oauth = OAuth(app)
+babel = Babel(app)
+
 
 import model, authenticate, user, basket
 
