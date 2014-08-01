@@ -1,0 +1,31 @@
+{% extends "basket/master.htm" %}
+
+{% block title %}My Baskets{% endblock %}
+
+{% block basket %}
+
+<div class="row">
+
+  {% for basket in mybaskets %}
+  <div class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+      <img data-src="holder.js/300x200" alt="...">
+      <div class="caption">
+        <h3>
+          <a href="{{ url_for('.view_basket', basket_id=basket.id) }}">{{basket.name}}</a>
+        </h3>
+        <p>
+          {% if basket.description %}
+            {{basket.description}}
+          {% endif %} 
+        </p>
+        <!-- <p><a href="#" class="btn btn-primary" role="button">Edit</a></p> -->
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+
+</div>
+
+
+{% endblock %}

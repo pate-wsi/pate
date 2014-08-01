@@ -1,0 +1,59 @@
+{% extends "basket/master.htm" %}
+
+{% block title %}{{_('My Baskets')}}{% endblock %}
+
+{% block basket %}
+
+{% if basket.id %}
+<form class="form-horizontal" action="{{ url_for('.change', basketid=basket.id) }}" method="post">
+{% else %}
+<form class="form-horizontal" action="{{ url_for('.change') }}" method="post">
+{% endif %}
+
+  <fieldset>
+    
+    <!-- Form Name -->
+    {% if basket.id %}
+    <legend>{{_('Modify Basket')}}</legend>
+    {% else %}
+    <legend>{{_('Create New Basket')}}</legend>
+    {% endif %}
+
+   {% if basket.id %}
+   <input type="hidden" name="basketid" value="{{ basket.id }}">
+   {% endif %}
+    
+    <!-- Text input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label">{{_('Basket Name')}}</label>
+      <div class="col-md-4">
+        <input id="basketname" name="basketname" type="text" placeholder="Name" class="form-control input-md" required="" value="{{ basket.name | xprint }}">
+      </div>
+    </div>
+
+    <!-- Text input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label">{{_('Description')}}</label>
+      <div class="col-md-4">
+        <textarea id="basketdescription" name="basketdescription" class="form-control input-md">{{ basket.description | xprint }}</textarea>
+      </div>
+    </div>
+
+
+    <!-- Button -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="submitbtn"></label>
+      <div class="col-md-4">
+        {% if basket.id %}
+        <button id="submitbtn" name="submitbtn" class="btn btn-success">{{_('Change')}}</button>
+        {% else %}
+        <button id="submitbtn" name="submitbtn" class="btn btn-success">{{_('Create')}}</button>
+        {% endif %}
+      </div>
+    </div>
+    
+  </fieldset>
+</form>
+
+
+{% endblock %}

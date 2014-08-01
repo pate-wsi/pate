@@ -39,6 +39,12 @@ def index():
     return render_template('index.htm')
 
 
+@app.template_filter('xprint')
+def xprint(pobject):
+    if pobject: return pobject
+    return ''
+
+
 if __name__ == '__main__':
     app.run()
 
