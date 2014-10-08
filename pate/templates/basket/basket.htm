@@ -2,11 +2,16 @@
 
 {% block title %}{{basket.name}}{% endblock %}
 
+{% block head %}
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.filedrop.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/dropbox.js') }}"></script>
+{% endblock %}
+
 {% block basket %}
 
 <div class="row">
 
-  <!--
+
   {% for basket in mybaskets %}
   <div class="col-sm-6 col-md-4">
     <div class="thumbnail">
@@ -24,9 +29,16 @@
     </div>
   </div>
   {% endfor %}
-  -->
+
 
 </div>
+
+
+<div class="well" id="dropbox">
+    <div class="message"></div>
+    <div class="info"></div>
+</div>
+
 
 
 {% endblock %}

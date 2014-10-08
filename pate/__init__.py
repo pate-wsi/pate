@@ -19,7 +19,9 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 oauth = OAuth(app)
 babel = Babel(app)
-
+app.config['upload.dir'] = config.get("IMAGE_UPLOAD", "upload.dir")
+app.config['imgserv.dir'] = config.get("IMAGE_UPLOAD", "imgserv.dir")
+app.config['allowed.ext'] = config.get("IMAGE_UPLOAD", "allowed.ext")
 
 import model, authenticate, user, basket
 

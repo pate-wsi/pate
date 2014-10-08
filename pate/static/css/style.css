@@ -1,0 +1,28 @@
+#dropbox .message{
+    position: relative;
+    left: 0px;
+    top: 0px;
+    width: 5vw;
+    height: 5vw;
+}
+
+#dropbox .message:before{
+    font-size: 5vw;
+    opacity: 0.3;
+    content:"\e198";
+    font-family:"Glyphicons Halflings";
+    line-height:1;
+    margin:10px;
+    display:inline-block;
+  }
+
+#dropbox .info{
+    position: relative;
+    margin-left: 7vw;
+    margin-right: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    top: -5vw;
+    width: auto;
+    height: auto;
+}
