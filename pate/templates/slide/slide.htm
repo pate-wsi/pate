@@ -1,0 +1,11 @@
+{% extends "master.htm" %}
+
+{% block title %}{{slide.name}}{% endblock %}
+
+{% block head %}
+    <script type="text/javascript">
+        dostuff = '';
+    </script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.filedrop.js') }}"></script>
+{% endblock %}
+

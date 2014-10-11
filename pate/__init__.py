@@ -12,6 +12,7 @@ config.readfp(open('server.ini'))
 
 app = Flask(__name__)
 app.debug = config.getboolean("GLOBAL", "debug")
+app.config['MAX_CONTENT_LENGTH'] = config.getint("GLOBAL", "max.content.length")
 app.config['SECRET_KEY'] = config.get("GLOBAL", "secret")
 app.config['SQLALCHEMY_DATABASE_URI'] = config.get("DATABASE", "sqlalchemy.url")
 db = SQLAlchemy(app)
@@ -19,16 +20,16 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 oauth = OAuth(app)
 babel = Babel(app)
-app.config['upload.dir'] = config.get("IMAGE_UPLOAD", "upload.dir")
 app.config['imgserv.dir'] = config.get("IMAGE_UPLOAD", "imgserv.dir")
 app.config['allowed.ext'] = config.get("IMAGE_UPLOAD", "allowed.ext")
 
-import model, authenticate, user, basket
+import model, authenticate, user, basket, slide
 
 
 app.register_blueprint(authenticate.bp, url_prefix='/authenticate')
 app.register_blueprint(user.bp, url_prefix='/user')
 app.register_blueprint(basket.bp, url_prefix='/basket')
+app.register_blueprint(slide.bp, url_prefix='/slide')
 
 
 @login_manager.user_loader
