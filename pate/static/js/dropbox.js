@@ -8,7 +8,8 @@ $(document).ready(function(){
 	dropbox.filedrop({
 		paramname: 'file',
 		maxfiles: 10,
-		url: 'upload',
+		url: dropboxurl,
+		data: dropboxdata,
 
 		uploadFinished:function(i,file,response){
 		    progressbar = $.data(file);

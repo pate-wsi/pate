@@ -3,6 +3,12 @@
 {% block title %}{{basket.name}}{% endblock %}
 
 {% block head %}
+    <script type="text/javascript">
+        dropboxurl  = 'upload';
+        dropboxdata = {
+                        basket: {{basket.id}},
+                      }
+    </script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.filedrop.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/dropbox.js') }}"></script>
 {% endblock %}
@@ -10,35 +16,23 @@
 {% block basket %}
 
 <div class="row">
-
-
-  {% for basket in mybaskets %}
+  {% for slide in basket.slides %}
   <div class="col-sm-6 col-md-4">
     <div class="thumbnail">
       <img data-src="holder.js/300x200" alt="...">
       <div class="caption">
         <h3>
-          <a href="">{{basket.name}}</a>
+          <a href="{{ url_for('slide.view_slide', slide_id=slide.id) }}">{{slide.name}}</a>
         </h3>
-        <p>
-          {% if basket.description %}
-            {{basket.description}}
-          {% endif %} 
-        </p>
       </div>
     </div>
   </div>
   {% endfor %}
-
-
 </div>
-
 
 <div class="well" id="dropbox">
     <div class="message"></div>
     <div class="info"></div>
 </div>
-
-
 
 {% endblock %}

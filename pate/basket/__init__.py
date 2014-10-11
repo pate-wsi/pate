@@ -5,7 +5,7 @@ from datetime import datetime
 from flask import Blueprint, current_app, render_template, flash, url_for, redirect, request, jsonify
 from flask.ext.login import current_user, login_required
 from flask.ext.babel import gettext
-from pate.model import Basket
+from pate.model import Basket, Slide
 from pate import db
 
 bp = Blueprint('basket', __name__)
@@ -52,14 +52,22 @@ def change(basketid=None):
 @bp.route('/upload', methods=['POST'])
 @login_required
 def upload():
+    # requires 'file' and 'basket' as post parameters
     if request.method == 'POST':
         file = request.files['file']
-        if file:
-            ext = path.splitext(file.filename)[1].lower()
+        basket = db.session.query(Basket).filter(Basket.id == int(request.form['basket'])).one()
+        if file and basket:
+            ext = path.splitext(file.filename)[1].lower()[:5]
             if not ext in current_app.config['allowed.ext']:
                 return jsonify({'success':False, 'error_msg': 'file extension "%s" is not allowed!' % ext})
             now = datetime.now()
-            filename = path.join(current_app.config['upload.dir'], "%s.%s" % (now.strftime("%Y-%m-%d-%H-%M-%S-%f"), ext))
-            print filename
+            slide = Slide()
+            slide.basket = basket
+            slide.name = path.splitext(file.filename)[0]
+            slide.file_extension = ext
+            db.session.add(slide)
+            db.session.flush()
+            filename = path.join(current_app.config['imgserv.dir'], '%i%s' % (slide.id, ext))
             file.save(filename)
+            db.session.commit()
             return jsonify({'success':True})
