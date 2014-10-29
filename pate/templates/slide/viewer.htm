@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//openlayers.org/en/v3.0.0/css/ol.css" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/viewer.css') }}" type="text/css">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script src="http://openlayers.org/en/v3.0.0/build/ol.js" type="text/javascript"></script>
+    <script src="{{ url_for('static', filename='js/helper.js') }}" type="text/javascript"></script>
+    <script src="{{ url_for('static', filename='js/viewer.js') }}" type="text/javascript"></script>
+    <title>{{slide.name}}</title>
+  </head>
+  <body>
+    <div id="map" class="map"></div>
+    <script type="text/javascript">
+        var imgservers = getJSON("{{ url_for('.get_image_servers') }}");
+        var imginfo = getJSON("{{ url_for('.info', slide_id=slide.id) }}");
+        init_map(imginfo, imgservers);
+    </script>
+  </body>
+</html>
