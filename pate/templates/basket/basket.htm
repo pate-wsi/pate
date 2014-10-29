@@ -19,7 +19,7 @@
   {% for slide in basket.slides %}
   <div class="col-sm-6 col-md-4">
     <div class="thumbnail">
-      <img data-src="holder.js/300x200" alt="...">
+      <img src="{{ url_for('slide.img_proxy', slide_id=slide.id) }}?width=300&height=200" alt="...">
       <div class="caption">
         <h3>
           <a href="{{ url_for('slide.view_slide', slide_id=slide.id) }}">{{slide.name}}</a>
