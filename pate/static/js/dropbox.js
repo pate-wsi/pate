@@ -8,6 +8,7 @@ $(document).ready(function(){
 	dropbox.filedrop({
 		paramname: 'file',
 		maxfiles: 10,
+		maxfilesize: 8*1024,
 		url: dropboxurl,
 		data: dropboxdata,
 
