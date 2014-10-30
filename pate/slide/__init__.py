@@ -12,8 +12,8 @@ bp = Blueprint('slide', __name__)
 def get_img_url(filename):
     for imageserver in db.session.query(ConfigImageServer).all():
         url = '%s/?FIF=%s' % (imageserver.url, filename)
-        size = requests.get('%s&OBJ=Max-size' % url)
-        if not size.status_code == 200:
+        r = requests.head('%s&OBJ=Max-size' % url)
+        if not r.status_code == 200:
             continue
         return url
     return False
@@ -61,6 +61,7 @@ def img_proxy(slide_id):
         if var in request.args: c[var] = int(request.args[var])
         if c[var] > 400: c[var] = 400
     url = get_img_url('%i%s' % (slide.id, slide.file_extension))
-    return Response(
-        requests.get('%s&WID=%i&HEI=%i&CVT=jpeg' % (url, c['width'], c['height'])).content,
-        mimetype='image/jpeg')
+    if url:
+        return redirect('%s&WID=%i&HEI=%i&CVT=jpeg' % (url, c['width'], c['height']))
+    else:
+        return '', 503
