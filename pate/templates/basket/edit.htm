@@ -5,9 +5,9 @@
 {% block basket %}
 
 {% if basket.id %}
-<form class="form-horizontal" action="{{ url_for('.change', basketid=basket.id) }}" method="post">
+<form class="form-horizontal" action="{{ url_for('.edit', basketid=basket.id) }}" method="post">
 {% else %}
-<form class="form-horizontal" action="{{ url_for('.change') }}" method="post">
+<form class="form-horizontal" action="{{ url_for('.edit') }}" method="post">
 {% endif %}
 
   <fieldset>

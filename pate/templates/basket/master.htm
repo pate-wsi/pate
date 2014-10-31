@@ -6,9 +6,9 @@
   <li><a href="{{ url_for('.my_baskets') }}">{{ _('My Baskets') }}</a></li>
   <li><a href="#">{{ _('Starred') }}</a></li>
   {% if basket and basket.id and basket.owner == current_user %}
-    <li><a href="{{ url_for('.change', basketid=basket.id) }}">{{ _('Edit Basket') }}</a></li>
+    <li><a href="{{ url_for('.edit', basketid=basket.id) }}">{{ _('Edit Basket') }}</a></li>
   {% endif %}
-  <li class="nav navbar-nav navbar-right"><a href="{{ url_for('.change') }}"><span class="glyphicon glyphicon-plus"></span>{{ _('New Basket') }}</a></li>
+  <li class="nav navbar-nav navbar-right"><a href="{{ url_for('.edit') }}"><span class="glyphicon glyphicon-plus"></span>{{ _('New Basket') }}</a></li>
 </ul>
 
 {% block basket %}{% endblock %}

@@ -29,14 +29,13 @@ def my_baskets():
 
 
 @bp.route('/create', methods=['GET', 'POST'])
-@bp.route('/change/<basketid>', methods=['GET', 'POST'])
-def change(basketid=None):
+@bp.route('/edit/<basketid>', methods=['GET', 'POST'])
+def edit(basketid=None):
     if basketid:
         basket = db.session.query(Basket).filter(Basket.id == basketid).one()
         msg = [ gettext(u'Basket information has been updated'), 'success' ]
     else:
         basket = Basket()
-        db.session.add(basket)
         msg = [ gettext(u'Basket has been created'), 'success' ]
     if 'basketname' in request.form: basket.name = request.form['basketname']
     basket.owner = current_user
@@ -44,9 +43,10 @@ def change(basketid=None):
         if not request.form['basketdescription'] == '':
             basket.description = request.form['basketdescription']
     if basket.name and 'basketdescription' in request.form:
+        db.session.add(basket)
         db.session.commit()
         flash(msg[0], msg[1])
-    return render_template('basket/change.htm', basket=basket)
+    return render_template('basket/edit.htm', basket=basket)
 
 
 @bp.route('/upload', methods=['POST'])
