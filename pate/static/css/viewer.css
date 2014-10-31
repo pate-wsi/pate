@@ -1,4 +1,14 @@
-.map{
+.map, .ol-viewport{
+    min-height: 100%;
+    min-width: 100%;
+    margin: 0;
+    overflow: hidden;
+}
+
+html, body{
     height: 100%;
     width: 100%;
+    margin: 0;
+    overflow: hidden;
 }
+

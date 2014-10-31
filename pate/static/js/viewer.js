@@ -22,6 +22,11 @@ function init_map(imginfo, imgservers){
     });
 
     var map = new ol.Map({
+      controls: ol.control.defaults().extend([
+                    new ol.control.FullScreen(),
+                    new ol.control.ZoomSlider(),
+                    //new ol.control.OverviewMap(),
+                    ]),
       layers: [
         new ol.layer.Tile({
           source: source
@@ -33,6 +38,7 @@ function init_map(imginfo, imgservers){
         projection: proj,
         center: imgCenter,
         zoom: 0
-      })
+      }),
+      logo: false,
     });
 }
