@@ -37,8 +37,10 @@ function init_map(imginfo, imgservers){
       view: new ol.View({
         projection: proj,
         center: imgCenter,
-        zoom: 0
+        zoom: 0,
+        minResolution: 0.25, // 4x digital zoom
       }),
       logo: false,
     });
+    window.map = map;
 }
